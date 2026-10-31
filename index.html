@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Ahmed D. Sherif (ash2osh) — Developer Portal & Content Hub</title>
+  <meta name="description" id="page-desc" content="Ahmed D. Sherif (ash2osh) — Oracle APEX & AI Solutions Architect. Technical blogs, video masterclasses, open source repositories, and enterprise architecture.">
+  <link rel="icon" type="image/png" href="./assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-en: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-ar: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-family: var(--font-en);
+      
+      --bg: #0b0f19;
+      --bg-card: rgba(18, 24, 38, 0.7);
+      --bg-card-hover: rgba(28, 38, 59, 0.85);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(56, 189, 248, 0.35);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-faint: #64748b;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --accent-alt: #818cf8;
+      --tag-bg: rgba(56, 189, 248, 0.1);
+      --tag-text: #7dd3fc;
+      --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg-card: rgba(255, 255, 255, 0.85);
+      --bg-card-hover: #ffffff;
+      --border: rgba(0, 0, 0, 0.08);
+      --border-hover: rgba(14, 165, 233, 0.4);
+      --text: #0f172a;
+      --text-muted: #475569;
+      --text-faint: #94a3b8;
+      --accent: #0284c7;
+      --accent-glow: rgba(2, 132, 199, 0.1);
+      --accent-alt: #6366f1;
+      --tag-bg: rgba(2, 132, 199, 0.08);
+      --tag-text: #0369a1;
+      --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+    }
+
+    html[dir="rtl"] {
+      --font-family: var(--font-ar);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      transition: background-color 0.25s, color 0.25s;
+      background-image: 
+        radial-gradient(circle at 15% 10%, var(--accent-glow) 0%, transparent 40%),
+        radial-gradient(circle at 85% 60%, rgba(129, 140, 248, 0.08) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 24px 20px 80px;
+    }
+
+    /* Header Nav */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0 32px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-logo .dot {
+      color: var(--accent);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-toggle {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 7px 14px;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      padding: 3px;
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .lang-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 2px 8px var(--accent-glow);
+    }
+
+    /* Hero Card */
+    .hero-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      margin-bottom: 48px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 36px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-alt), #ec4899);
+    }
+
+    .avatar-wrapper {
+      position: relative;
+    }
+
+    .avatar-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 25px var(--accent-glow);
+    }
+
+    .status-badge {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      width: 18px;
+      height: 18px;
+      background: #10b981;
+      border: 3px solid var(--bg);
+      border-radius: 50%;
+    }
+
+    html[dir="rtl"] .status-badge {
+      right: auto;
+      left: 6px;
+    }
+
+    .hero-info h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .names-row {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .handle-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      direction: ltr;
+    }
+
+    .hero-role {
+      font-size: 1.15rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin: 8px 0 16px;
+    }
+
+    .hero-bio {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.65;
+      margin-bottom: 24px;
+      max-width: 680px;
+    }
+
+    .hero-social {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .social-link svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .social-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Section Headings */
+    .section-header {
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title svg {
+      color: var(--accent);
+    }
+
+    .section-subtitle {
+      color: var(--text-faint);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    /* Channel Cards Grid */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 26px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .card-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--tag-bg);
+      color: var(--accent);
+    }
+
+    .card-icon-box svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .card-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.35;
+      color: var(--text);
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .card-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: gap 0.2s;
+    }
+
+    .card:hover .card-action {
+      gap: 10px;
+    }
+
+    /* Repos Grid */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 48px;
+    }
+
+    .repo-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+
+    .repo-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+    }
+
+    .repo-card h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+    }
+
+    .repo-card p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .repo-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.8rem;
+      color: var(--text-faint);
+    }
+
+    .repo-lang-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e34c26;
+      display: inline-block;
+    }
+
+    .repo-lang-dot.sql { background: #e38c00; }
+    .repo-lang-dot.astro { background: #ff5d01; }
+
+    /* Skills Cloud */
+    .skills-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 48px;
+    }
+
+    .skills-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .skill-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 14px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 32px 0 16px;
+      color: var(--text-faint);
+      font-size: 0.875rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 840px) {
+      .hero-card {
+        grid-template-columns: 1fr;
+        padding: 30px;
+        text-align: center;
+        gap: 20px;
+      }
+      .avatar-wrapper {
+        margin: 0 auto;
+      }
+      .names-row {
+        justify-content: center;
+      }
+      .hero-social {
+        justify-content: center;
+      }
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Top Header Navigation -->
+    <header>
+      <a href="./" class="brand-logo">
+        <span>ash2osh<span class="dot">.</span>github<span class="dot">.</span>io</span>
+      </a>
+      <div class="header-actions">
+        <!-- Language Switcher -->
+        <div class="lang-switch" role="group" aria-label="Language selector">
+          <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" id="btn-ar" onclick="setLang('ar')">عربي</button>
+        </div>
+        <!-- Theme Toggle -->
+        <button class="btn-toggle" id="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+          <span id="theme-icon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Card / About Me -->
+    <section class="hero-card">
+      <div class="avatar-wrapper">
+        <img class="avatar-img" src="./assets/avatar.jpg" alt="Ahmed D. Sherif (ash2osh)">
+        <span class="status-badge" title="Active"></span>
+      </div>
+      <div class="hero-info">
+        <div class="names-row">
+          <h1 id="hero-name">Ahmed D. Sherif</h1>
+          <span class="handle-pill">ash2osh</span>
+        </div>
+        <p class="hero-role" id="hero-role">Oracle APEX & AI Solutions Architect</p>
+        <p class="hero-bio" id="hero-bio">
+          Engineering high-scale enterprise systems with Oracle APEX and Oracle Database, and architecting the next frontier of AI Coding Agents, context graph pipelines, and developer workflows.
+        </p>
+        <div class="hero-social">
+          <a href="https://github.com/ash2osh" class="social-link" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+            <span>GitHub</span>
+          </a>
+          <a href="https://www.linkedin.com/in/ahmed-d-sherif" class="social-link" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.59 1.59 0 0 0 1.6-1.59c0-.88-.72-1.6-1.6-1.6a1.6 1.6 0 0 0-1.6 1.6c0 .87.72 1.59 1.6 1.59m1.4 9.74v-8.37H5.06v8.37h2.8z"/></svg>
+            <span>LinkedIn</span>
+          </a>
+          <a href="https://youtube.com/@orochimaruASH" class="social-link" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M21.58 7.19a2.5 2.5 0 0 0-1.76-1.77C18.26 5 12 5 12 5s-6.26 0-7.82.42A2.5 2.5 0 0 0 2.42 7.2 26.5 26.5 0 0 0 2 12a26.5 26.5 0 0 0 .42 4.81 2.5 2.5 0 0 0 1.76 1.77C5.74 19 12 19 12 19s6.26 0 7.82-.42a2.5 2.5 0 0 0 1.76-1.77A26.5 26.5 0 0 0 22 12a26.5 26.5 0 0 0-.42-4.81zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+            <span>YouTube</span>
+          </a>
+          <a href="https://ash2osh.hashnode.dev/" class="social-link" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M22.35 10.59a3.86 3.86 0 0 0-.82-1.39l-6.72-6.73a3.86 3.86 0 0 0-5.46 0L2.63 9.2a3.86 3.86 0 0 0 0 5.46l6.72 6.72a3.86 3.86 0 0 0 5.46 0l6.72-6.72c.38-.38.66-.85.82-1.36a3.84 3.84 0 0 0 0-2.71zm-9.35 4.41a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+            <span>Hashnode</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Published Hub / Channels Section -->
+    <div class="section-header">
+      <div>
+        <h2 class="section-title" id="section-hub-title">
+          <span>🌐</span> Published Content & Portals
+        </h2>
+        <p class="section-subtitle" id="section-hub-subtitle">Direct access to technical blogs, masterclasses, and publications</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- 1. Arabic Technical Blog -->
+      <a href="https://ash2osh.github.io/arabic-blog/" class="card" target="_blank" rel="noopener noreferrer">
+        <div class="card-top">
+          <div class="card-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
+          </div>
+          <span class="card-badge" id="badge-ar-blog">15 Articles • RTL</span>
+        </div>
+        <div>
+          <h3 id="card-ar-blog-title">🇪🇬 Arabic Technical Blog</h3>
+          <p id="card-ar-blog-desc">
+            Deep-dive architectural articles on Oracle APEX internals, high-speed task caching, and AI Coding Agents — written in witty, sophisticated Egyptian technical Arabic ("العامية التقنية الراقية").
+          </p>
+        </div>
+        <div class="card-action">
+          <span id="card-ar-blog-action">Explore Arabic Blog</span>
+          <span>→</span>
+        </div>
+      </a>
+
+      <!-- 2. English Hashnode Blog -->
+      <a href="https://ash2osh.hashnode.dev/" class="card" target="_blank" rel="noopener noreferrer">
+        <div class="card-top">
+          <div class="card-icon-box">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.35 10.59a3.86 3.86 0 0 0-.82-1.39l-6.72-6.73a3.86 3.86 0 0 0-5.46 0L2.63 9.2a3.86 3.86 0 0 0 0 5.46l6.72 6.72a3.86 3.86 0 0 0 5.46 0l6.72-6.72c.38-.38.66-.85.82-1.36a3.84 3.84 0 0 0 0-2.71zm-9.35 4.41a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+          </div>
+          <span class="card-badge">Global • Hashnode</span>
+        </div>
+        <div>
+          <h3 id="card-en-blog-title">🇬🇧 English Engineering Blog</h3>
+          <p id="card-en-blog-desc">
+            Comprehensive system architecture breakdowns, deployment automation, and enterprise APEX patterns published for developers worldwide.
+          </p>
+        </div>
+        <div class="card-action">
+          <span id="card-en-blog-action">Read on Hashnode</span>
+          <span>→</span>
+        </div>
+      </a>
+
+      <!-- 3. YouTube Channel -->
+      <a href="https://youtube.com/@orochimaruASH" class="card" target="_blank" rel="noopener noreferrer">
+        <div class="card-top">
+          <div class="card-icon-box" style="color: #ef4444; background: rgba(239, 68, 68, 0.1);">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.58 7.19a2.5 2.5 0 0 0-1.76-1.77C18.26 5 12 5 12 5s-6.26 0-7.82.42A2.5 2.5 0 0 0 2.42 7.2 26.5 26.5 0 0 0 2 12a26.5 26.5 0 0 0 .42 4.81 2.5 2.5 0 0 0 1.76 1.77C5.74 19 12 19 12 19s6.26 0 7.82-.42a2.5 2.5 0 0 0 1.76-1.77A26.5 26.5 0 0 0 22 12a26.5 26.5 0 0 0-.42-4.81zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+          </div>
+          <span class="card-badge">Video • Masterclasses</span>
+        </div>
+        <div>
+          <h3 id="card-yt-title">🎬 YouTube Channel (@orochimaruASH)</h3>
+          <p id="card-yt-desc">
+            Practical, step-by-step masterclasses on Oracle APEX development, database administration, full installation walkthroughs, and hands-on AI code generation.
+          </p>
+        </div>
+        <div class="card-action">
+          <span id="card-yt-action">Watch Masterclasses</span>
+          <span>→</span>
+        </div>
+      </a>
+
+      <!-- 4. LinkedIn Insights -->
+      <a href="https://www.linkedin.com/in/ahmed-d-sherif" class="card" target="_blank" rel="noopener noreferrer">
+        <div class="card-top">
+          <div class="card-icon-box" style="color: #0ea5e9; background: rgba(14, 165, 233, 0.1);">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.59 1.59 0 0 0 1.6-1.59c0-.88-.72-1.6-1.6-1.6a1.6 1.6 0 0 0-1.6 1.6c0 .87.72 1.59 1.6 1.59m1.4 9.74v-8.37H5.06v8.37h2.8z"/></svg>
+          </div>
+          <span class="card-badge">Network • Updates</span>
+        </div>
+        <div>
+          <h3 id="card-li-title">💼 LinkedIn Technical Publishing</h3>
+          <p id="card-li-desc">
+            Bite-sized enterprise lessons, CI/CD automation tips, database architectural patterns, and production engineering notes.
+          </p>
+        </div>
+        <div class="card-action">
+          <span id="card-li-action">Connect on LinkedIn</span>
+          <span>→</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Featured Projects / Repositories -->
+    <div class="section-header">
+      <div>
+        <h2 class="section-title" id="section-repos-title">
+          <span>📦</span> Featured Repositories & Tools
+        </h2>
+        <p class="section-subtitle" id="section-repos-subtitle">Open-source foundations, starter kits, and course resources</p>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <!-- Repo 1 -->
+      <a href="https://github.com/ash2osh/APEX_PROJECT_TEMPLATE" class="repo-card" target="_blank" rel="noopener noreferrer">
+        <div>
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7.5v9l-8 4.5-8-4.5v-9L12 3l8 4.5Z"/><path d="M12 12v9"/><path d="m12 12 8-4.5"/><path d="M12 12 4 7.5"/></svg>
+            APEX_PROJECT_TEMPLATE
+          </h4>
+          <p id="repo-1-desc">Standard enterprise project template separating app_data, app_code, and app_security with automated SQLcl migration scripts.</p>
+        </div>
+        <div class="repo-meta">
+          <span><span class="repo-lang-dot sql"></span> PL/SQL</span>
+          <span>Starter Kit</span>
+        </div>
+      </a>
+
+      <!-- Repo 2 -->
+      <a href="https://github.com/ash2osh/apex_ai_course" class="repo-card" target="_blank" rel="noopener noreferrer">
+        <div>
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            apex_ai_course
+          </h4>
+          <p id="repo-2-desc">Code repository, exercise files, and AI agent prompts supporting the comprehensive YouTube masterclass course.</p>
+        </div>
+        <div class="repo-meta">
+          <span><span class="repo-lang-dot sql"></span> SQL & Prompts</span>
+          <span>Course Repo</span>
+        </div>
+      </a>
+
+      <!-- Repo 3 -->
+      <a href="https://github.com/ash2osh/arabic-blog" class="repo-card" target="_blank" rel="noopener noreferrer">
+        <div>
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+            arabic-blog
+          </h4>
+          <p id="repo-3-desc">Astro + Grimorio static blog engine driving the dedicated Arabic technical blog on GitHub Pages with native RTL typography.</p>
+        </div>
+        <div class="repo-meta">
+          <span><span class="repo-lang-dot astro"></span> Astro / Vue</span>
+          <span>Blog Engine</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Core Specialties / Skills Section -->
+    <div class="skills-section">
+      <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 6px;" id="skills-title">🛠️ Core Architecture & Specialties</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem;" id="skills-subtitle">Key frameworks, database internals, and development methodologies</p>
+      <div class="skills-pills">
+        <span class="skill-pill">⚡ Oracle APEX (v19–v24+)</span>
+        <span class="skill-pill">🗄️ Oracle Database 19c & 23ai</span>
+        <span class="skill-pill">⚙️ Advanced PL/SQL & Packages</span>
+        <span class="skill-pill">🤖 AI Coding Agents & Workflows</span>
+        <span class="skill-pill">🗺️ AST & Graphify Knowledge Graphs</span>
+        <span class="skill-pill">🚀 SQLcl CI/CD Automation</span>
+        <span class="skill-pill">📑 High-Speed Task Caching</span>
+        <span class="skill-pill">🌐 Astro & Modern Static Engines</span>
+        <span class="skill-pill">🛡️ Strict Enterprise Schema Separation</span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2026 <strong>Ahmed D. Sherif (ash2osh)</strong> • <span id="footer-text">Built for developers and architects. Hosted on GitHub Pages.</span></p>
+    </footer>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        pageTitle: "Ahmed D. Sherif (ash2osh) — Developer Portal & Content Hub",
+        pageDesc: "Ahmed D. Sherif (ash2osh) — Oracle APEX & AI Solutions Architect. Technical blogs, video masterclasses, open source repositories, and enterprise architecture.",
+        heroName: "Ahmed D. Sherif",
+        heroRole: "Oracle APEX & AI Solutions Architect",
+        heroBio: "Engineering high-scale enterprise systems with Oracle APEX and Oracle Database, and architecting the next frontier of AI Coding Agents, context graph pipelines, and developer workflows.",
+        hubTitle: "<span>🌐</span> Published Content & Portals",
+        hubSubtitle: "Direct access to technical blogs, masterclasses, and publications",
+        badgeArBlog: "15 Articles • RTL",
+        cardArBlogTitle: "🇪🇬 Arabic Technical Blog",
+        cardArBlogDesc: "Deep-dive architectural articles on Oracle APEX internals, high-speed task caching, and AI Coding Agents — written in witty, sophisticated Egyptian technical Arabic (\"العامية التقنية الراقية\").",
+        cardArBlogAction: "Explore Arabic Blog",
+        cardEnBlogTitle: "🇬🇧 English Engineering Blog",
+        cardEnBlogDesc: "Comprehensive system architecture breakdowns, deployment automation, and enterprise APEX patterns published for developers worldwide on Hashnode.",
+        cardEnBlogAction: "Read on Hashnode",
+        cardYtTitle: "🎬 YouTube Channel (@orochimaruASH)",
+        cardYtDesc: "Practical, step-by-step masterclasses on Oracle APEX development, database administration, full installation walkthroughs, and hands-on AI code generation.",
+        cardYtAction: "Watch Masterclasses",
+        cardLiTitle: "💼 LinkedIn Technical Publishing",
+        cardLiDesc: "Bite-sized enterprise lessons, CI/CD automation tips, database architectural patterns, and production engineering notes.",
+        cardLiAction: "Connect on LinkedIn",
+        reposTitle: "<span>📦</span> Featured Repositories & Tools",
+        reposSubtitle: "Open-source foundations, starter kits, and course resources",
+        repo1Desc: "Standard enterprise project template separating app_data, app_code, and app_security with automated SQLcl migration scripts.",
+        repo2Desc: "Code repository, exercise files, and AI agent prompts supporting the comprehensive YouTube masterclass course.",
+        repo3Desc: "Astro + Grimorio static blog engine driving the dedicated Arabic technical blog on GitHub Pages with native RTL typography.",
+        skillsTitle: "🛠️ Core Architecture & Specialties",
+        skillsSubtitle: "Key frameworks, database internals, and development methodologies",
+        footerText: "Built for developers and architects. Hosted on GitHub Pages."
+      },
+      ar: {
+        pageTitle: "أحمد شريف (ash2osh) — بوابة المطور والمحتوى التقني",
+        pageDesc: "أحمد شريف (ash2osh) — مهندس معماري لحلول أوراكل أبيكس والذكاء الاصطناعي. مقالات تقنية، شروحات فيديو، ومستودعات مفتوحة المصدر.",
+        heroName: "أحمد شريف (Ahmed D. Sherif)",
+        heroRole: "مهندس معماري لحلول أوراكل أبيكس والذكاء الاصطناعي",
+        heroBio: "هندسة الأنظمة المؤسسية الضخمة باستخدام أوراكل أبيكس وقواعد بيانات أوراكل، وبناء الجيل القادم من وكلاء البرمجة الذكية (AI Coding Agents)، وخطوط سياق الجراف، وبيئات التطوير المتقدمة.",
+        hubTitle: "<span>🌐</span> المنصات والمحتوى المنشور",
+        hubSubtitle: "بوابتك المباشرة للمدونات التقنية، شروحات الفيديو، والمقالات المتخصصة",
+        badgeArBlog: "15 مقالاً • بالعامية الراقية",
+        cardArBlogTitle: "🇪🇬 المدونة التقنية العربية",
+        cardArBlogDesc: "مقالات معمارية متعمقة في كواليس أوراكل أبيكس، تسريع كاش العمليات، واستخدام وكلاء الذكاء الاصطناعي — مكتوبة بأسلوب \"العامية التقنية الراقية\" السلس والممتع.",
+        cardArBlogAction: "تصفح المدونة العربية",
+        cardEnBlogTitle: "🇬🇧 المدونة الإنجليزية (Hashnode)",
+        cardEnBlogDesc: "شروحات معمارية تفصيلية، أفضل ممارسات أتمتة النشر والـ CI/CD، وأنماط تصميم الأنظمة المؤسسية موجهة لمجتمع المطورين العالمي.",
+        cardEnBlogAction: "اقرأ على Hashnode",
+        cardYtTitle: "🎬 قناة اليوتيوب التعليمية (@orochimaruASH)",
+        cardYtDesc: "سلسلة ماستركلاس عملية وتطبيقية لشرح أوراكل أبيكس، برمجة الـ PL/SQL الحديثة، تثبيت المنظومات، وتوظيف الذكاء الاصطناعي خطوة بخطوة.",
+        cardYtAction: "شاهد الشروحات",
+        cardLiTitle: "💼 المحتوى التقني على LinkedIn",
+        cardLiDesc: "إضاءات معمارية سريعة، نصائح أتمتة الـ DevOps، حيل أداء الداتابيز، وخبرات مستفادة من بيئات الإنتاج الحية.",
+        cardLiAction: "تواصل عبر LinkedIn",
+        reposTitle: "<span>📦</span> المشاريع والمستودعات مفتوحة المصدر",
+        reposSubtitle: "قوالب الإنتاج، أدوات التطوير، وأكواد الكورسات التدريبية",
+        repo1Desc: "قالب المشروعات المؤسسية المعتمد لفصل طبقات البيانات (app_data, app_code, app_security) وأتمتة الـ SQLcl.",
+        repo2Desc: "مستودع الأكواد والتمارين التطبيقية وبرومبتات وكلاء الذكاء الاصطناعي الخاصة بسلسلة كورس اليوتيوب الكامل.",
+        repo3Desc: "محرك المدونة العربية المبني بـ Astro و Grimorio لدعم الخطوط العربية وتنسيق الـ RTL بنقاء 100%.",
+        skillsTitle: "🛠️ المعمارية ومجالات التخصص",
+        skillsSubtitle: "التقنيات الأساسية، معمارية قواعد البيانات، ومنهجيات التطوير",
+        footerText: "صُمم للمطورين والمهندسين المعماريين. مستضاف على GitHub Pages."
+      }
+    };
+
+    let currentLang = 'en';
+
+    function setLang(lang) {
+      currentLang = lang;
+      const html = document.documentElement;
+      const dict = translations[lang];
+
+      html.lang = lang;
+      html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+      document.getElementById('page-title').innerText = dict.pageTitle;
+      document.getElementById('page-desc').setAttribute('content', dict.pageDesc);
+      document.getElementById('hero-name').innerText = dict.heroName;
+      document.getElementById('hero-role').innerText = dict.heroRole;
+      document.getElementById('hero-bio').innerText = dict.heroBio;
+
+      document.getElementById('section-hub-title').innerHTML = dict.hubTitle;
+      document.getElementById('section-hub-subtitle').innerText = dict.hubSubtitle;
+
+      document.getElementById('badge-ar-blog').innerText = dict.badgeArBlog;
+      document.getElementById('card-ar-blog-title').innerText = dict.cardArBlogTitle;
+      document.getElementById('card-ar-blog-desc').innerText = dict.cardArBlogDesc;
+      document.getElementById('card-ar-blog-action').innerText = dict.cardArBlogAction;
+
+      document.getElementById('card-en-blog-title').innerText = dict.cardEnBlogTitle;
+      document.getElementById('card-en-blog-desc').innerText = dict.cardEnBlogDesc;
+      document.getElementById('card-en-blog-action').innerText = dict.cardEnBlogAction;
+
+      document.getElementById('card-yt-title').innerText = dict.cardYtTitle;
+      document.getElementById('card-yt-desc').innerText = dict.cardYtDesc;
+      document.getElementById('card-yt-action').innerText = dict.cardYtAction;
+
+      document.getElementById('card-li-title').innerText = dict.cardLiTitle;
+      document.getElementById('card-li-desc').innerText = dict.cardLiDesc;
+      document.getElementById('card-li-action').innerText = dict.cardLiAction;
+
+      document.getElementById('section-repos-title').innerHTML = dict.reposTitle;
+      document.getElementById('section-repos-subtitle').innerText = dict.reposSubtitle;
+
+      document.getElementById('repo-1-desc').innerText = dict.repo1Desc;
+      document.getElementById('repo-2-desc').innerText = dict.repo2Desc;
+      document.getElementById('repo-3-desc').innerText = dict.repo3Desc;
+
+      document.getElementById('skills-title').innerText = dict.skillsTitle;
+      document.getElementById('skills-subtitle').innerText = dict.skillsSubtitle;
+      document.getElementById('footer-text').innerText = dict.footerText;
+
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+
+      localStorage.setItem('portal_lang', lang);
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      const nextTheme = isDark ? 'light' : 'dark';
+      html.setAttribute('data-theme', nextTheme);
+      document.getElementById('theme-icon').innerText = nextTheme === 'dark' ? '🌙' : '☀️';
+      localStorage.setItem('portal_theme', nextTheme);
+    }
+
+    // Initialize state
+    (function init() {
+      const savedLang = localStorage.getItem('portal_lang') || 
+        (new URLSearchParams(window.location.search).get('lang')) || 
+        'en';
+      setLang(savedLang === 'ar' ? 'ar' : 'en');
+
+      const savedTheme = localStorage.getItem('portal_theme') || 
+        (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      document.getElementById('theme-icon').innerText = savedTheme === 'dark' ? '🌙' : '☀️';
+    })();
+  </script>
+</body>
+</html>
